@@ -46,6 +46,11 @@ var makeDancer = function(top, left, timeBetweenSteps) {
 
 };
 
+makeDancer.prototype.lineUp = function(){
+  this.left = 50;
+  this.setPosition();
+};
+
 makeDancer.prototype.setPosition = function() {
   // Use css top and left properties to position our <span> tag
   // where it belongs on the page. See http://api.jquery.com/css/

@@ -24,18 +24,23 @@ $(document).ready(function() {
     var dancerMakerFunction = window[dancerMakerFunctionName];
 
     if(dancerMakerFunctionName === 'snow') {
-      amount = 500;  
+      amount = 200;  
     }
     // make a dancer with a random position
     for(var i = 0; i < amount; i++) {
       var dancer = new dancerMakerFunction(
         $("body").height() * Math.random(),
         $("body").width() * Math.random(),
-        Math.random() * 1000
-      );
+        Math.random() * 1000);
+
+        if(dancerMakerFunctionName !== 'snow' && dancerMakerFunctionName !== "lineup") {
+          window.dancers.push(dancer); 
+          console.log(dancers);
+        }
       $('body').append(dancer.$node);
     };  
     
+
     
   });
 });
