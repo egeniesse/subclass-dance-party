@@ -49,13 +49,15 @@ var makeDancer = function(top, left, timeBetweenSteps) {
 
 makeDancer.prototype.lineUp = function(){
   if(this.linedUp) {
-    this.left = $("body").width() * Math.random(); 
+    var newLeft  = $("body").width() * Math.random();
+    this.$node.animate( {'left' :newLeft.toString()}, 'slow'); 
     this.linedUp = false; 
   } else {
-    this.left = 50;
+    this.$node.animate({'left': '50'}, 'slow');
+    //this.left = 50;
     this.linedUp = true; 
   }; 
-  this.setPosition();
+  //this.setPosition();
 };
 
 makeDancer.prototype.setPosition = function() {
@@ -78,5 +80,6 @@ makeDancer.prototype.step = function() {
   var time = this.timeBetweenSteps;
   setTimeout(fn, time); 
 };
+
 
 

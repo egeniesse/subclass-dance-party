@@ -20,10 +20,26 @@
 
 var makeBlinkyDancer = function(top, left, timeBetweenSteps) {
   makeDancer.call(this, top, left, timeBetweenSteps);
+  this.colorNum = Math.random();
+
   
   // we plan to overwrite the step function below, but we still want the superclass step behavior to work,
   // so we must keep a copy of the old version of this function
+  var styleSettings = {
+    border : '10px solid green',
+  };
+  if(this.colorNum < 0.25){
+    styleSettings.border = '10px solid red';
+  } else if (this.colorNum < 0.5){
+    styleSettings.border = '10px solid yellow';
+  } else if (this.colorNum < 0.75){
+    styleSettings.border = '10px solid blue';
+  }
 
+
+
+
+  this.$node.css(styleSettings);
 
 
 };
