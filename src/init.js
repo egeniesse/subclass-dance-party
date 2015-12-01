@@ -15,21 +15,28 @@ $(document).ready(function() {
      * A new object of the given type will be created and added
      * to the stage.
      */
+
+    var amount = 1; 
     var dancerMakerFunctionName = $(this).data("dancer-maker-function-name");
+
 
     // get the maker function for the kind of dancer we're supposed to make
     var dancerMakerFunction = window[dancerMakerFunctionName];
 
+    if(dancerMakerFunctionName === 'snow') {
+      amount = 500;  
+    }
     // make a dancer with a random position
-
-    var dancer = new dancerMakerFunction(
-      $("body").height() * Math.random(),
-      $("body").width() * Math.random(),
-      Math.random() * 1000
-    );
-     
+    for(var i = 0; i < amount; i++) {
+      var dancer = new dancerMakerFunction(
+        $("body").height() * Math.random(),
+        $("body").width() * Math.random(),
+        Math.random() * 1000
+      );
+      $('body').append(dancer.$node);
+    };  
     
-    $('body').append(dancer.$node);
+    
   });
 });
 

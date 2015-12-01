@@ -25,3 +25,11 @@ body, a:link, a:visited, a:active{
   border-radius:10px;
   position:absolute;
 }
+.square {
+  border: 15px solid #1D1;
+  border-radius:0px;
+}
+
+.snow {
+  border: 5px solid white;
+}
