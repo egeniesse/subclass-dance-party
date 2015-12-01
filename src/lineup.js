@@ -1,7 +1,7 @@
 var lineup = function() {
-  for (var i = 0; i < window.dancers.length; i++){
+  for (var i = 0; i < window.squareDancers.length; i++){
     // var height = window.dancers.length/ (i +1);
     // window.dancers[i].$node.animate({'top': ''}, 'slow');
-    window.dancers[i].lineUp(); 
+    window.squareDancers[i].lineUp(); 
   }
 };

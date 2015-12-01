@@ -1,6 +1,7 @@
 $(document).ready(function() {
-  window.dancers = [];
-  
+  window.squareDancers = [];
+  window.circleDancers = []; 
+
   $( "body" ).on("mouseover", ".square", function() {
     console.log(this.status); 
     if(this.status === undefined){
@@ -49,9 +50,11 @@ $(document).ready(function() {
           $("body").width() * Math.random(),
           Math.random() * 1000);
 
-          if(dancerMakerFunctionName !== 'snow') {
-            window.dancers.push(dancer); 
-            console.log(dancers);
+          if(dancerMakerFunctionName === 'firstDancer') {
+            window.squareDancers.push(dancer); 
+            console.log(dancer);
+          } else if (dancerMakerFunctionName === 'blinkyDancer') {
+            window.circleDancers.push(dancer);  
           }
         $('body').append(dancer.$node);
       }; 

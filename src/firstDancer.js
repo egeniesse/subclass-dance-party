@@ -6,6 +6,7 @@ var firstDancer = function(top, left, timeBetweenSteps){
   this.setPosition();
   this.called = false;
   this.$node[0].status = true; 
+  this.closest = null; 
 };
 
 firstDancer.prototype = Object.create(makeDancer.prototype); 
@@ -24,3 +25,17 @@ firstDancer.prototype.step = function(){
   
 };
 
+firstDancer.prototype.closest = function() {
+  var closestNode = null; 
+  for(var i = 0; i < window.squareDancers; i++) {
+    if(squareDancers[i] !== this) {
+      var height = Math.abs(this.top - squareDancers[i].top); 
+      var width = Math.abs(this.left - squareDancers[i].left); 
+      squareDancers[i].closest = Math.sqrt((height*height)+(width*width)); 
+      if(squareDancers[i].closest < closestNode.closest || closestNode === null) {
+        closestNode = squareDancers[i]; 
+      }
+    }
+  }
+  this.closest = closestNode; 
+}
