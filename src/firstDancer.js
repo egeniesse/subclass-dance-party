@@ -4,24 +4,30 @@ var firstDancer = function(top, left, timeBetweenSteps){
   this.position = 1;
   this.$node = $('<span class="square dancer"></span>')
   this.setPosition();
+  this.stepInvoked = false;
 };
 
 firstDancer.prototype = Object.create(makeDancer.prototype);
 
 firstDancer.prototype.step = function(){
+
+
   makeDancer.prototype.step.call(this);
-  if(this.position === 1){
-    this.top -= 50;
-    this.position ++;
-  } else if (this.position === 2){
-    this.left += 50;
-    this.position ++;
-  } else if (this.position === 3){
-    this.top += 50;
-    this.position ++;
-  } else {
-    this.left -= 50;
-    this.position = 1;
+  node = this;
+  var danceFunc = function(){
+    node.$node.animate({'left': '-=50'}, 500, function(){
+      node.$node.animate({'left': '+=50'}, 500);
+   });
+
+  if(!node.stepInvoked){
+    console.log('invoked')
+    node.stepInvoked = true;
+    console.log('called');
+    //danceFunc();
+    setInterval(function(){ danceFunc();}, 1000);
   }
-  this.setPosition();
+
+
+  };
+  
 };
