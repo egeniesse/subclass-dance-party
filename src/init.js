@@ -1,5 +1,17 @@
 $(document).ready(function() {
   window.dancers = [];
+  
+  $( "body" ).on("mouseover", ".square", function() {
+    console.log(this.status); 
+    if(this.status === undefined){
+      this.status = true;
+    }
+    if(this.status) {
+      this.status = false; 
+    } else {
+      this.status = true; 
+    }
+  }); 
 
   $(".addDancerButton").on("click", function(event) {
     /* This function sets up the click handlers for the create-dancer
@@ -45,8 +57,8 @@ $(document).ready(function() {
       }; 
     }  
     
-
     
   });
+
 });
 

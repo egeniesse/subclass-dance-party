@@ -29,8 +29,8 @@ body, a:link, a:visited, a:active{
   position:absolute;
 }
 .square {
-  border: 15px solid #1D1;
-  border-radius:0px;
+  width: 75px;
+  border: none;
 }
 
 .snow {
