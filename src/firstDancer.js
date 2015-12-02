@@ -1,6 +1,6 @@
 
 var firstDancer = function(top, left, timeBetweenSteps){
-  makeDancer.call(this, top, left,1000);
+  makeDancer.call(this, top, left,3);
   this.position = 1;
   this.$node = $('<img src="src/elf.png" class="square dancer"/>');
   this.setPosition();
@@ -15,16 +15,37 @@ firstDancer.prototype = Object.create(makeDancer.prototype);
 
 firstDancer.prototype.step = function(){
 
-  //makeDancer.prototype.step.call(this);
+  makeDancer.prototype.step.call(this);
   var node = this;
-  if(this.$node[0].status) {
-    this.$node.animate({'top':'-=50'},500);
-    this.$node.animate({'top':'+=50'},500);
-    setTimeout(function(){node.step();}, 1000);
-  } else {
-   this.$node.animate({'left':'-=50'},500);
-   this.$node.animate({'left':'+=50'},500);
-   setTimeout(function(){node.step();}, 1000);  }
+  var toggle = true;
+  //if(this.$node[0].status) {
+    var down = function(){
+      this.top += 1;
+      this.setPosition(); 
+    };
+    var up = function(){
+      this.top -= 1;
+      this.setPosition();
+    }
+    if(this.top === ($('body').height() - 10)){
+      toggle = false;
+    } else if (this.top === 10){
+      toggle = true;
+    }
+    if(toggle){
+      down();
+    } else {
+      up();
+    }
+
+
+
+    //this.$node.animate({'top':'+=50'},500);
+    //setTimeout(function(){node.step();}, 1000);
+  // } else {
+  //  this.$node.animate({'left':'-=50'},500);
+  //  this.$node.animate({'left':'+=50'},500);
+  //  setTimeout(function(){node.step();}, 1000);  }
   
 };
 
@@ -41,5 +62,5 @@ firstDancer.prototype.closest = function() {
     }
   }
   this.closest = closestNode; 
-}
+};
 
