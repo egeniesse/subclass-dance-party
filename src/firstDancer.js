@@ -21,19 +21,30 @@ firstDancer.prototype.step = function(){
   var up = function(inverse){
     inverse ? this.top++ : this.top--;
     inverse ? this.counter-- : this.counter++;
+  }.bind(this);
 
-
-    
+  var right = function(inverse){
+    inverse ? this.left++ : this.left--;
+    inverse ? this.counter-- : this.counter++;
   }.bind(this);
 
   makeDancer.prototype.step.call(this);
-
-    up(this.toggle);
-    this.setPosition();
-    if(this.counter === 100){
-      this.toggle = true;
-    } else if (this.counter === 0){
-      this.toggle = false;
+    if(this.$node[0].status){
+      up(this.toggle);
+      this.setPosition();
+      if(this.counter === 100){
+        this.toggle = true;
+      } else if (this.counter === 0){
+        this.toggle = false;
+      }
+    } else {
+      right(this.toggle);
+      this.setPosition();
+      if(this.counter === 100){
+        this.toggle = true;
+      } else if (this.counter === 0){
+        this.toggle = false;
+      }
     }
   
   
