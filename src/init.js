@@ -14,6 +14,16 @@ $(document).ready(function() {
     }
   }); 
 
+  $("body").on("click", ".square", function(event){
+     $(this).attr("src", "src/arnold.png");  
+  })
+
+  $('.squareDanceButton').on('click', function(){
+    for(var i = 0; i < window.squareDancers.length; i++){
+
+    }
+  })
+
   $(".addDancerButton").on("click", function(event) {
     /* This function sets up the click handlers for the create-dancer
      * buttons on dancefloor.html. You should only need to make one small change to it.
@@ -46,8 +56,8 @@ $(document).ready(function() {
     // make a dancer with a random position
       for(var i = 0; i < amount; i++) {
         var dancer = new dancerMakerFunction(
-          $("body").height() * Math.random(),
-          $("body").width() * Math.random(),
+          Math.floor($("body").height() * Math.random()),
+          Math.floor($("body").width() * Math.random()),
           Math.random() * 1000);
 
           if(dancerMakerFunctionName === 'firstDancer') {

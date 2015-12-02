@@ -39,7 +39,7 @@ var makeDancer = function(top, left, timeBetweenSteps) {
   this.timeBetweenSteps = timeBetweenSteps;
   this.$node = $('<span class="dancer"></span>');
   this.setPosition();
-  //this.step();
+  this.step();
   this.linedUp = false; 
 
   // now that we have defined the dancer object, we can start setting up important parts of it by calling the methods we wrote
@@ -48,15 +48,35 @@ var makeDancer = function(top, left, timeBetweenSteps) {
 };
 
 makeDancer.prototype.lineUp = function(){
+  
   if(this.linedUp) {
-    var newLeft  = $("body").width() * Math.random();
-    this.$node.animate( {'left' :newLeft.toString()}, 'slow'); 
-    this.linedUp = false; 
+    console.log('running')
+    this.newLeft  = this.newLeft || Math.floor($("body").width() * Math.random());
+    if(this.left < this.newLeft){
+      this.left++;
+      setTimeout(function(){this.lineUp()}.bind(this), 0.5);
+    } else if (this.left > this.newLeft){
+      this.left--;
+      setTimeout(function(){this.lineUp()}.bind(this), 0.5);
+    } else {
+      this.linedUp = false;
+      this.newLeft = null;
+    }
+    this.setPosition(); 
   } else {
-    this.$node.animate({'left': '50'}, 'slow');
-    //this.left = 50;
-    this.linedUp = true; 
-  }; 
+    if (this.left === 50){
+      this.linedUp = true;
+    } else if (this.left > 50){
+      this.left -= 1;
+      setTimeout(function(){this.lineUp()}.bind(this), 0.5);
+    } else if(this.left < 50){
+      this.left += 1;
+      setTimeout(function(){this.lineUp()}.bind(this), 0.5);
+    }
+    setTimeout(function(){}, 15);
+    this.setPosition();
+
+  } 
   //this.setPosition();
 };
 
