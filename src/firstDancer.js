@@ -1,13 +1,18 @@
 
 var firstDancer = function(top, left, timeBetweenSteps){
-  makeDancer.call(this, top, left,3);
+
+  makeDancer.call(this, top, left,15);
+
   this.position = 1;
+  this.toggle = false;
   this.$node = $('<img src="src/elf.png" class="square dancer"/>');
   this.setPosition();
   this.called = false;
   this.$node[0].status = true; 
-  this.closest = null; 
+  this.$node.nearest = null; 
+  this.counter = 0;
   this.step();
+  this.newLeft = null;
 
 };
 
@@ -15,33 +20,43 @@ firstDancer.prototype = Object.create(makeDancer.prototype);
 
 firstDancer.prototype.step = function(){
 
+
+  var up = function(inverse){
+    inverse ? this.top++ : this.top--;
+    inverse ? this.counter-- : this.counter++;
+  }.bind(this);
+
+  var right = function(inverse){
+    inverse ? this.left++ : this.left--;
+    inverse ? this.counter-- : this.counter++;
+  }.bind(this);
+
   makeDancer.prototype.step.call(this);
-  var node = this;
-  var toggle = true;
-  //if(this.$node[0].status) {
-    var down = function(){
-      this.top += 1;
-      this.setPosition(); 
-    };
-    var up = function(){
-      this.top -= 1;
+    if(this.$node[0].status){
+      up(this.toggle);
       this.setPosition();
-    }
-    if(this.top === ($('body').height() - 10)){
-      toggle = false;
-    } else if (this.top === 10){
-      toggle = true;
-    }
-    if(toggle){
-      down();
+      if(this.counter === 100){
+        this.toggle = true;
+      } else if (this.counter === 0){
+        this.toggle = false;
+      }
     } else {
-      up();
+      right(this.toggle);
+      this.setPosition();
+      if(this.counter === 100){
+        this.toggle = true;
+      } else if (this.counter === 0){
+        this.toggle = false;
+      }
     }
+  
+  
 
 
-
-    //this.$node.animate({'top':'+=50'},500);
-    //setTimeout(function(){node.step();}, 1000);
+  // if(this.$node[0].status) {
+  //   this.$node.animate({'top':'-=50'},500);
+  //   this.$node.animate({'top':'+=50'},500);
+  //   setTimeout(function(){node.step();}, 1000);
   // } else {
   //  this.$node.animate({'left':'-=50'},500);
   //  this.$node.animate({'left':'+=50'},500);
@@ -49,18 +64,20 @@ firstDancer.prototype.step = function(){
   
 };
 
-firstDancer.prototype.closest = function() {
+firstDancer.prototype.closestNode = function() {
   var closestNode = null; 
   for(var i = 0; i < window.squareDancers; i++) {
     if(squareDancers[i] !== this) {
       var height = Math.abs(this.top - squareDancers[i].top); 
       var width = Math.abs(this.left - squareDancers[i].left); 
-      squareDancers[i].closest = Math.sqrt((height*height)+(width*width)); 
-      if(squareDancers[i].closest < closestNode.closest || closestNode === null) {
+      squareDancers[i].$node.closest = Math.sqrt((height*height)+(width*width)); 
+      if(squareDancers[i].$node.closest < closestNode.$node.closest || closestNode === null) {
         closestNode = squareDancers[i]; 
       }
     }
   }
-  this.closest = closestNode; 
-};
+
+  this.$node.closest = closestNode; 
+}
+
 
